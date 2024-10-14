@@ -2,7 +2,8 @@
 This file contains logic interact with the user
 """
 import user_service
-# holasss
+from users import users
+
 def get_user():
     """
     """
@@ -12,6 +13,37 @@ def get_user():
         print(response)
     else:
         print(f"El usuario {username} no esta registrado")
+        
+
+def create_user_info():
+    """
+    Solicita la información del usuario y lo crea.
+    """
+    username = input("Ingrese el nuevo username: ")
+    name = input("Ingrese el nombre: ")
+    degree = input("Ingrese el grado: ")
+    password = input("Ingrese la contraseña: ")
+
+    try:
+        user_service.create_user(username, name=name, degree=degree, password=password)
+    except Exception as e:
+        print(e) 
+
+        
+def update_user_info():
+    """
+    Solicita la información del usuario y la actualiza.
+    """
+    username = input("Ingrese el username: ")
+    name = input("Ingrese el nuevo nombre: ")
+    degree = input("Ingrese el nuevo grado: ")
+    password = input("Ingrese la nueva contraseña: ")
+
+    try:
+        user_service.update_user(username, name=name, degree=degree, password=password)
+        print(f"Información del usuario {username} actualizada correctamente.")
+    except Exception as e:
+        print(e)
 
 
 def menu():
@@ -26,23 +58,32 @@ def menu():
     """
     print(message)
 
-
 def main():
     """
     """
     flag = True
-    user_service.user_repository.load_users()
+    usersloaded = user_service.user_repository.load_users()
+    
     while flag:
         menu()
-        option = input("Opcion: ")
+        option = input("Opción: ")
 
         if option == "1":
             get_user()
+        
+        elif option == "2":
+            user_service.findAllUsers()
+
+        
+        elif option == "3":
+            create_user_info() 
+            
+        elif option == "4":
+            update_user_info()
+        
         elif option == "5":
             flag = False
         else:
-            print("opcion no valida")
+            print("Opción no válida")
 
-
-if __name__ == "__main__":
-    main()
+main()

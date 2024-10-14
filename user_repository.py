@@ -16,9 +16,11 @@ JSON_PATH = os.path.join(BASE_PATH, "user.json")
 def load_users():
     """
     """
-    global users
+    global users 
     f = open(JSON_PATH, "r")
     users = json.load(f)
+
+
     f.close()
 
     return users
@@ -29,9 +31,14 @@ def save_users(new_info):
     """
     f = open(JSON_PATH, "w")
     json.dump(new_info,
-              f,
-              indent=4)
+            f,
+            indent=4)
+
+
     f.close()
+    
+def findAllUsers():
+    return users
 
 
 def get_users(username):

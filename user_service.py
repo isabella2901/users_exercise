@@ -7,33 +7,61 @@ This file contains the logic to:
 4. Get user information
 """
 import user_repository
+from users import users
+
+
+
 
 def get_user(username):
     """
     """
     return user_repository.get_users(username)
 
-
+def findAllUsers():
+    
+    print(user_repository.findAllUsers())
 def create_user(username, **kwargs):
+    global users
+    users = user_repository.findAllUsers()
     """
+    Crea un nuevo usuario y guarda la información en el archivo.
     """
-    if user_repository.get_users(username):
-        raise Exception(f"The user {username} already exists")
+    if username in users:
+        raise Exception(f"El usuario {username} ya existe")
     
     if len(kwargs) != 3:
-        raise Exception(f"The user information doesn't have the expected structure")
+        raise Exception(f"La información del usuario no tiene la estructura esperada")
 
+    cond = all([kwargs.get(key) for key in ["name", "degree", "password"]])
     
-    cond = all([ kwargs.get(key) for key in ["name", "degree", "password"]])
+    if not cond:
+        raise Exception(f"La información del usuario no tiene la estructura esperada")
 
+    # Agregar el nuevo usuario al diccionario
 
+    users[username] = kwargs
+
+    # Guardar los usuarios actualizados en el archivo JSON
+    user_repository.save_users(users)
+
+    print(f"Usuario {username} creado correctamente.")
+
+def update_user(username, **kwargs):
+    global users
+    users = user_repository.findAllUsers()
+    """
+    Actualiza la información de un usuario existente.
+    """
+    if username not in users:
+        raise Exception(f"El usuario {username} no está registrado")
+
+    # Aseguramos que la información contenga las claves necesarias
+    cond = all([kwargs.get(key) for key in ["name", "degree", "password"]])
+    
+    if not cond:
+        raise Exception(f"La información del usuario no tiene la estructura esperada")
+
+    users[username] = kwargs  # Actualiza la información del usuario
+    user_repository.save_users(users)  # Guarda los cambios en el archivo
 
     print(kwargs)
-
-
-
-create_user("pepito",
-            name="a",
-            degree="asdas",
-            password="gasd",
-            alias="asd")

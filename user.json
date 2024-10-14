@@ -1,12 +1,32 @@
 {
-    "natalia": {
-        "name": "pepe piamba",
-        "degree": "ul",
-        "password": "mevoamatar"
+    "s": {
+        "name": "isabella",
+        "degree": "grado1",
+        "password": "contra"
     },
-    "jhosting": {
-        "name": "lotero piamba",
-        "degree": "ul",
-        "password": "lovecalculator100"
+    "a": {
+        "name": "a",
+        "degree": "a",
+        "password": "a"
+    },
+    "l": {
+        "name": "l",
+        "degree": "l",
+        "password": "l"
+    },
+    "t": {
+        "name": "t",
+        "degree": "t",
+        "password": "t"
+    },
+    "hola": {
+        "name": "hola",
+        "degree": "hola",
+        "password": "jola"
+    },
+    "dani": {
+        "name": "dani",
+        "degree": "def",
+        "password": "derrr"
     }
 }
